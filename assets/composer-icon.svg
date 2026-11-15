@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="ChatGPT-DSH Bridge">
+  <rect width="64" height="64" rx="14" fill="#0B1220"/>
+  <path d="M15 22h15c4 0 6 2 6 6v15" fill="none" stroke="#10A37F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M49 42H34c-4 0-6-2-6-6V21" fill="none" stroke="#E6FFFA" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+  <circle cx="15" cy="22" r="4" fill="#10A37F"/>
+  <circle cx="49" cy="42" r="4" fill="#E6FFFA"/>
+  <path d="M27 29l4 4-4 4" fill="none" stroke="#E6FFFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

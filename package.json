@@ -1,0 +1,37 @@
+{
+  "name": "chatgpt-dsh-bridge",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Local STDIO MCP bridge from ChatGPT to DeepSeek Harness (DSH) headless tasks.",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test --test-concurrency=1 test/unit/*.test.js test/mcp.integration.test.js test/permanent-grant.integration.test.js",
+    "test:unit": "node --test test/unit/*.test.js",
+    "test:mcp": "node --test --test-concurrency=1 test/mcp.integration.test.js test/permanent-grant.integration.test.js",
+    "smoke": "node scripts/mcp-smoke.mjs",
+    "approve-write": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/approve-write.ps1",
+    "revoke-write": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/revoke-write.ps1",
+    "write-grant-status": "node scripts/write-grant-status.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "chatgpt",
+    "deepseek-harness",
+    "dsh",
+    "local"
+  ],
+  "author": {
+    "name": "sho777564"
+  },
+  "repository": "https://github.com/sho777564/chatgpt-dsh-bridge",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  }
+}

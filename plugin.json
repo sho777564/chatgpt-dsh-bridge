@@ -1,0 +1,42 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "chatgpt-dsh-bridge",
+  "version": "0.3.0",
+  "description": "Dispatches local coding tasks from ChatGPT to DeepSeek Harness (DSH) over a local STDIO MCP server.",
+  "author": {
+    "name": "sho777564"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/sho777564/chatgpt-dsh-bridge",
+  "keywords": [
+    "chatgpt",
+    "deepseek-harness",
+    "dsh",
+    "mcp",
+    "local",
+    "coding"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ChatGPT–DSH Bridge",
+        "shortDescription": "GPT plans; DSH runs locally",
+        "longDescription": "Plan and review coding tasks in ChatGPT or Codex, then run them through DeepSeek Harness on Windows. Every task is restricted to a locally configured project allowlist. Read-only is the default; writes require a signed grant for the exact project directory.",
+        "developerName": "sho777564",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Check the local DSH bridge health with dsh_health_check.",
+          "Use DSH to inspect this project in read-only mode and summarize its test setup.",
+          "Plan the fix with me first; do not start a write task until I explicitly approve it locally."
+        ],
+        "brandColor": "#10A37F",
+        "composerIcon": "./assets/composer-icon.svg",
+        "logo": "./assets/logo.svg"
+      }
+    }
+  }
+}

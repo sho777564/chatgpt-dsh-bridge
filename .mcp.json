@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "dsh_bridge": {
+      "command": "node",
+      "args": [
+        "${PLUGIN_ROOT}/server/index.js"
+      ],
+      "cwd": "${PLUGIN_ROOT}",
+      "startup_timeout_sec": 30,
+      "tool_timeout_sec": 120
+    }
+  }
+}
