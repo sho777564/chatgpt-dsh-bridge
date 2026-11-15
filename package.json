@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-dsh-bridge",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "Local STDIO MCP bridge from ChatGPT to DeepSeek Harness (DSH) headless tasks.",
   "type": "module",

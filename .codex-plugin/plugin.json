@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-dsh-bridge",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Dispatches local coding tasks from ChatGPT to DeepSeek Harness (DSH) over a local STDIO MCP server.",
   "author": {
     "name": "sho777564"

@@ -63,6 +63,9 @@ export async function validateWorkspace(rawWorkspace, config) {
     throw new BridgeError("WORKSPACE_INVALID", "workspace must be an absolute path (for example G:\\projects\\my-app).");
   }
 
+  // Apply policy before touching the filesystem, then repeat on the canonical
+  // path to catch a symlink or junction resolving into a forbidden location.
+  assertNotSensitiveDirectory(path.resolve(rawWorkspace), config);
   let resolved;
   try {
     resolved = await realpath(rawWorkspace);
@@ -70,6 +73,7 @@ export async function validateWorkspace(rawWorkspace, config) {
     throw new BridgeError("WORKSPACE_NOT_FOUND", `Workspace does not exist or is not accessible: ${rawWorkspace}`);
   }
 
+  assertNotSensitiveDirectory(resolved, config);
   let info;
   try {
     info = await stat(resolved);
@@ -80,7 +84,6 @@ export async function validateWorkspace(rawWorkspace, config) {
     throw new BridgeError("WORKSPACE_NOT_DIRECTORY", `Workspace is not a directory: ${resolved}`);
   }
 
-  assertNotSensitiveDirectory(resolved, config);
 
   if (!config.security.allowedRoots.length) {
     throw new BridgeError("WORKSPACE_ROOTS_REQUIRED", "Configure at least one project directory in allowedRoots, then restart the bridge.");

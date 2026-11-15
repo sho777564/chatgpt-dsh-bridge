@@ -9,6 +9,7 @@ jobs:
   test:
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         node: [22, 24]
     steps:
@@ -21,3 +22,20 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Verify plugin installation and upgrade
+        if: matrix.node == 24
+        run: |
+          $project = Join-Path $env:RUNNER_TEMP 'dsh-bridge-demo'
+          New-Item -ItemType Directory -Path $project | Out-Null
+          $fixture = (Resolve-Path '.\test\fixtures\fake-dsh.mjs').Path
+          1..2 | ForEach-Object {
+            powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install.ps1 -DshCliPath $fixture -AllowedRoots $project -SkipNpmInstall -SkipTests
+            if ($LASTEXITCODE -ne 0) { throw "Installer failed on pass $_" }
+          }
+          $plugins = Join-Path $HOME '.codex\plugins'
+          $installed = Get-Content -LiteralPath (Join-Path $plugins 'chatgpt-dsh-bridge\plugin.json') -Raw | ConvertFrom-Json
+          $source = Get-Content -LiteralPath '.\plugin.json' -Raw | ConvertFrom-Json
+          if ($installed.version -ne $source.version) { throw "Installed version does not match the source" }
+          if (@(Get-ChildItem -LiteralPath $plugins -Filter 'chatgpt-dsh-bridge.bak-*').Count -ne 1) {
+            throw "Expected a backup of the first installation"
+          }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Reject sensitive workspace paths before filesystem lookup, including on clean machines where those directories do not exist.
+- Verify plugin installation and upgrade on the Windows CI runner.
+
 ## 0.3.0
 
 - Require a configured project allowlist for tasks, including read-only tasks. Reject workspaces overlapping bridge or credential locations.
